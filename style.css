@@ -1,3 +1,7 @@
+.hero {
+    text-align: center;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -16,11 +20,29 @@
     gap: 5px;
 }
 
+button {
+    border-radius: 1em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-weight: 300;
+    text-align: center;
+    transition: all 0.2s;
+    box-shadow: 2px 2px;
+}
+
+button:hover {
+    background-color:#4095c6;
+}
+
+
 .digit, .operator, .clear, .equal, .backspace {
     padding: 30px;
     font-size: 25px;
-    border: 2px solid #ccc;
-    border-radius: 10px;
+}
+
+.digit, .clear {
+    background-color: #00215E;
+    color: #FFC55A;
 }
 
 .clear {
@@ -28,32 +50,35 @@
 }
 
 .operator, .equal, .backspace {
-    background-color: #0B2E59;
+    background-color: #FFC55A;
     border: none;
     color: white;
-    padding: 20px;
 }
 
 .operator-container {
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
+    height: 200px;
     gap: 5px;
-    padding-right: 10px;
-    padding-top: 10px;
+    box-sizing: border-box;
 }
 
 .calculation {
     display: flex;
+    flex-direction: column;
     flex-shrink: 0;
     height: max-content;
     width: 350px;
     align-items: center;
+    gap: 10px;
 }
 
 .display {
+    display: flex;
+    justify-content: flex-end;
     padding-left: 6px;
     background-color: #ccc;
-    border: 3px solid #A9A9A9;
     border-radius: 5px;
     width: 300px;
     height: 40px;

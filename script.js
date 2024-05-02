@@ -11,9 +11,9 @@ const divide = function(a, b) {
 
   if (b === 0) {
     alert("stop. why are u doing this man?");
-    return "Alright we're done here";
+    return "dont do that >:(";
   }
-  
+
   return result.toFixed(3);
 };
 
@@ -38,11 +38,13 @@ function operate(operator, firstNum, secondnum) {
     return result;
 }
 
-function updateDisplay(display, operation) {
-  display.textContent = "";
+function updateDisplay(display, operation="") {
+  display.textContent = operation + "";
+  display.style.cssText = "justify-content: flex-start";
 }
 
-let operator, result;
+let operator;
+let result = 0;
 let operatorCheck = 0;
 let equalCheck = 0;
 let firstNum = [];
@@ -78,6 +80,7 @@ btns.forEach((digit) => {
       secNum.push(digit.textContent);
       second = secNum.join("")
       display.textContent = second;
+      display.style.cssText = "justify-content: flex-end";
       prevNumber.textContent = `${first} ${operator} ${second}`
     } 
   });
@@ -90,7 +93,7 @@ operationButtons.forEach((operation) => {
 
     if (operatorCheck === 1) {
       operator = operation.textContent;
-      updateDisplay(display);
+      updateDisplay(display, operator);
       prevNumber.textContent = `${first} ${operator} `;
     } else if (operatorCheck > 1) {
       result = operate(operator, parseFloat(first), parseFloat(second));
@@ -103,7 +106,7 @@ operationButtons.forEach((operation) => {
 
       second = 0;
       secNum = [];
-      updateDisplay(display);
+      updateDisplay(display, operator);
     }
   });
 });
@@ -114,6 +117,7 @@ operationButtons.forEach((operation) => {
 equal.addEventListener("click", () => {
   result = operate(operator, parseFloat(first), parseFloat(second));
   display.textContent = result;
+  display.style.cssText = "justify-content: flex-start";
 });
 
 clear.addEventListener("click", () => {
@@ -126,13 +130,18 @@ clear.addEventListener("click", () => {
     first, second = 0;
 
   } else if (operatorCheck >= 1) {
+    if (result === 0) {
+      prevNumber.textContent = "";
+    } else {
+      prevNumber.textContent = `last calculation: ${first} ${operator} ${second} = ${result}`;
+    }
+
     updateDisplay(display);
-    prevNumber.textContent = `your last calculation: ${first} ${operator} ${second} = ${result}`;
     firstNum = [];
     secNum = [];
     first, second = 0;
   }
-
+  
   operatorCheck = 0;
   decimalCheck = 0;
 })
@@ -158,5 +167,49 @@ backspace.addEventListener("click", () => {
 
     second = secNum.join("");
     display.textContent = second;
+  }
+})
+
+document.addEventListener("keydown", (event) => {
+  const key = event.key;
+  const numerical = "0123456789";
+  const operators = ["+", "-", "*", "/"]
+
+  if (numerical.includes(key)) {
+    if (operatorCheck === 0) {
+      firstNum.push(key);
+      first = firstNum.join("");
+      display.textContent = first;
+    } else if (operatorCheck >= 1) {
+      secNum.push(key);
+      second = secNum.join("")
+      display.textContent = second;
+      display.style.cssText = "justify-content: flex-end";
+      prevNumber.textContent = `${first} ${operator} ${second}`
+    } 
+  } else if (operators.includes(key)) {
+      operatorCheck += 1;
+
+      if (operatorCheck === 1) {
+        operator = key.replace("*", "x");
+        updateDisplay(display, operator);
+        prevNumber.textContent = `${first} ${operator} `;
+      } else if (operatorCheck > 1) {
+        result = operate(operator, parseFloat(first), parseFloat(second));
+        prevNumber.textContent = `${first} ${operator} ${second} = ${result}`;
+        operator = key.replace("*", "x");
+
+        first = result.toString();
+        firstNum = [];
+        firstNum.push(first);
+
+        second = 0;
+        secNum = [];
+        updateDisplay(display, operator);
+    }
+  } else if (key === 'Enter') {
+    result = operate(operator, parseFloat(first), parseFloat(second));
+    display.textContent = result;
+    display.style.cssText = "justify-content: flex-start";
   }
 })
