@@ -7,7 +7,14 @@ const subtract = function(a, b) {
 };
 
 const divide = function(a, b) {
-  return a / b;
+  let result = a / b;
+
+  if (b === 0) {
+    alert("stop. why are u doing this man?");
+    return "Alright we're done here";
+  }
+  
+  return result.toFixed(3);
 };
 
 const multiply = function(args) {
@@ -32,7 +39,7 @@ function operate(operator, firstNum, secondnum) {
 }
 
 function updateDisplay(display, operation) {
-  display.textContent = 0;
+  display.textContent = "";
 }
 
 let operator, result;
@@ -41,11 +48,14 @@ let equalCheck = 0;
 let firstNum = [];
 let first, second;
 let secNum = [];
+let decimalCheck = 0;
 const btns = document.querySelectorAll(".digit");
 const display = document.querySelector('.display');
 const operationButtons = document.querySelectorAll('.operator');
 const equal = document.querySelector('.equal');
-const clear = document.querySelector('.clear')
+const backspace = document.querySelector('.backspace');
+const clear = document.querySelector('.clear');
+const decimal = document.querySelector('.decimal')
 let prevNumber = document.getElementById('previous');
 
 
@@ -122,3 +132,16 @@ clear.addEventListener("click", () => {
   operatorCheck = 0;
 })
 
+backspace.addEventListener("click", () => {
+  if (operatorCheck === 0) {
+    firstNum.pop();
+    first = firstNum.join("");
+    display.textContent = first;
+  }
+
+  if (operatorCheck > 0) {
+    secNum.pop();
+    second = secNum.join("");
+    display.textContent = second;
+  }
+})

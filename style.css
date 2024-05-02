@@ -1,6 +1,8 @@
 .container {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
+    flex-shrink: 0;
     justify-content: center;
     align-items: center;
     height: 700px;
@@ -14,17 +16,22 @@
     gap: 5px;
 }
 
-.digit, .operator, .clear, .equal {
+.digit, .operator, .clear, .equal, .backspace {
     padding: 30px;
     font-size: 25px;
     border: 2px solid #ccc;
     border-radius: 10px;
 }
 
-.operator, .equal {
+.clear {
+    padding: 20px;
+}
+
+.operator, .equal, .backspace {
     background-color: #0B2E59;
     border: none;
     color: white;
+    padding: 20px;
 }
 
 .operator-container {
@@ -37,12 +44,13 @@
 
 .calculation {
     display: flex;
+    flex-shrink: 0;
+    height: max-content;
     width: 350px;
+    align-items: center;
 }
 
 .display {
-    display: flex;
-    align-items: center;
     padding-left: 6px;
     background-color: #ccc;
     border: 3px solid #A9A9A9;
@@ -50,4 +58,11 @@
     width: 300px;
     height: 40px;
     font-size: 30px;
+    overflow: hidden;
+}
+
+#previous {
+    width: 300px;
+    opacity: 0.5;
+    text-align: start;
 }
