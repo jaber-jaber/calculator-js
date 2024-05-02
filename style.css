@@ -5,25 +5,23 @@
     align-items: center;
     height: 700px;
     gap: 10px;
-    border: 2px solid black;
 }
 
 .buttons {
     display: flex;
     flex-wrap: wrap;
-    width: 300px;
     justify-content: center;
     gap: 5px;
 }
 
-.digit, .operator {
+.digit, .operator, .clear, .equal {
     padding: 30px;
     font-size: 25px;
     border: 2px solid #ccc;
     border-radius: 10px;
 }
 
-.operator {
+.operator, .equal {
     background-color: #0B2E59;
     border: none;
     color: white;
@@ -33,6 +31,13 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
+    padding-right: 10px;
+    padding-top: 10px;
+}
+
+.calculation {
+    display: flex;
+    width: 350px;
 }
 
 .display {

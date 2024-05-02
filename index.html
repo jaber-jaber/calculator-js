@@ -9,27 +9,33 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <h1>Simple Calculator</h1>
+    <p>quick tutorial: do a number and then an operation and then a number and u get an answer.</p>
     <div class="container">
-        <div class="display">324134</div>
-        <div class="buttons">
-            <button class="digit">0</button>
-            <button class="digit">1</button>
-            <button class="digit">2</button>
-            <button class="digit">3</button>
-            <button class="digit">4</button>
-            <button class="digit">5</button>
-            <button class="digit">6</button>
-            <button class="digit">7</button>
-            <button class="digit">8</button>
-            <button class="digit">9</button>
-            <button class="digit clear">Clear</button>
-            <div class="operator-container">
-                <button class="operator">+</button>
-                <button class="operator">-</button>
-                <button class="operator">x</button>
-                <button class="operator">÷</button>
+        <div id="previous"></div>
+        <div class="display"></div>
+        <div class="calculation">
+            <div class="buttons">
+                <button class="digit">9</button>
+                <button class="digit">1</button>
+                <button class="digit">2</button>
+                <button class="digit">3</button>
+                <button class="digit">4</button>
+                <button class="digit">5</button>
+                <button class="digit">6</button>
+                <button class="digit">7</button>
+                <button class="digit">8</button>
+                <button class="digit">0</button>
+                <button class="clear">Clear</button>
             </div>
 
+            <div class="operator-container">
+                <button class="operator add">+</button>
+                <button class="operator subtract">-</button>
+                <button class="operator multiply">x</button>
+                <button class="operator divide">÷</button>
+                <button class="equal">=</button>
+            </div>
         </div>
     </div>
 </body>
