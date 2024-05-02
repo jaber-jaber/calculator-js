@@ -61,6 +61,15 @@ let prevNumber = document.getElementById('previous');
 
 btns.forEach((digit) => {
   digit.addEventListener("click", () => {
+
+    if (digit === decimal && firstNum.length > 0 && decimalCheck > 0) {
+      return; // Do nothing if the decimal has been used
+    }
+
+    if (digit === decimal && firstNum.length > 0 && decimalCheck === 0) {
+      decimalCheck += 1;
+    }
+
     if (operatorCheck === 0) {
       firstNum.push(digit.textContent);
       first = firstNum.join("");
@@ -84,7 +93,6 @@ operationButtons.forEach((operation) => {
       updateDisplay(display);
       prevNumber.textContent = `${first} ${operator} `;
     } else if (operatorCheck > 1) {
-      console.log(`operator check: ${operatorCheck}`)
       result = operate(operator, parseFloat(first), parseFloat(second));
       prevNumber.textContent = `${first} ${operator} ${second} = ${result}`;
       operator = operation.textContent;
@@ -92,11 +100,9 @@ operationButtons.forEach((operation) => {
       first = result.toString();
       firstNum = [];
       firstNum.push(first);
-      console.log(`first: ${first}, first_array: ${firstNum}`);
 
       second = 0;
       secNum = [];
-      console.log(`second: ${second}, second_array: ${second}`);
       updateDisplay(display);
     }
   });
@@ -115,13 +121,11 @@ clear.addEventListener("click", () => {
   if (operatorCheck < 1) {
     updateDisplay(display);
     prevNumber.textContent = "";
-    console.log("hi")
     firstNum = [];
     secNum = [];
     first, second = 0;
 
   } else if (operatorCheck >= 1) {
-    console.log("hello")
     updateDisplay(display);
     prevNumber.textContent = `your last calculation: ${first} ${operator} ${second} = ${result}`;
     firstNum = [];
@@ -130,17 +134,28 @@ clear.addEventListener("click", () => {
   }
 
   operatorCheck = 0;
+  decimalCheck = 0;
 })
 
 backspace.addEventListener("click", () => {
   if (operatorCheck === 0) {
-    firstNum.pop();
+    let lastElement = firstNum.pop();
+
+    if (lastElement.localeCompare(".")) {
+      decimalCheck = 0;
+    }
+
     first = firstNum.join("");
     display.textContent = first;
   }
 
   if (operatorCheck > 0) {
-    secNum.pop();
+    let lastElement = secNum.pop();
+
+    if (lastElement.localeCompare(".")) {
+      decimalCheck = 0;
+    }
+
     second = secNum.join("");
     display.textContent = second;
   }
