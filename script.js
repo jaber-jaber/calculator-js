@@ -55,7 +55,7 @@ btns.forEach((digit) => {
       firstNum.push(digit.textContent);
       first = firstNum.join("");
       display.textContent = first;
-    } else if (operatorCheck === 1) {
+    } else if (operatorCheck >= 1) {
       secNum.push(digit.textContent);
       second = secNum.join("")
       display.textContent = second;
@@ -67,38 +67,27 @@ btns.forEach((digit) => {
 operationButtons.forEach((operation) => {
   operation.addEventListener("click", () => {
 
-    if (operatorCheck === 0) {
+    operatorCheck += 1;
+
+    if (operatorCheck === 1) {
       operator = operation.textContent;
       updateDisplay(display);
       prevNumber.textContent = `${first} ${operator} `;
-    }
-
-    operatorCheck += 1;
-
-    if (operatorCheck > 1) {
+    } else if (operatorCheck > 1) {
+      console.log(`operator check: ${operatorCheck}`)
       result = operate(operator, parseFloat(first), parseFloat(second));
       prevNumber.textContent = `${first} ${operator} ${second} = ${result}`;
       operator = operation.textContent;
-    
+
+      first = result.toString();
       firstNum = [];
-      firstNum.push(result);
-      first = result;
+      firstNum.push(first);
+      console.log(`first: ${first}, first_array: ${firstNum}`);
 
-      console.log(first);
-      
-      updateDisplay(display);
+      second = 0;
       secNum = [];
-
-      btns.forEach((digit) => {
-        digit.addEventListener("click", () => {
-          secNum.push(digit.textContent);
-          second = secNum.join("");
-          display.textContent = second;
-        })
-      })
-
-      result = operate(operator, parseFloat(first), parseFloat(second));
-
+      console.log(`second: ${second}, second_array: ${second}`);
+      updateDisplay(display);
     }
   });
 });
@@ -115,12 +104,13 @@ clear.addEventListener("click", () => {
 
   if (operatorCheck < 1) {
     updateDisplay(display);
+    prevNumber.textContent = "";
     console.log("hi")
     firstNum = [];
     secNum = [];
     first, second = 0;
 
-  } else if (operatorCheck > 1) {
+  } else if (operatorCheck >= 1) {
     console.log("hello")
     updateDisplay(display);
     prevNumber.textContent = `your last calculation: ${first} ${operator} ${second} = ${result}`;
