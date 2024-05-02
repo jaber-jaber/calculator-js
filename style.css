@@ -1,0 +1,48 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 700px;
+    gap: 10px;
+    border: 2px solid black;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    width: 300px;
+    justify-content: center;
+    gap: 5px;
+}
+
+.digit, .operator {
+    padding: 30px;
+    font-size: 25px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+}
+
+.operator {
+    background-color: #0B2E59;
+    border: none;
+    color: white;
+}
+
+.operator-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.display {
+    display: flex;
+    align-items: center;
+    padding-left: 6px;
+    background-color: #ccc;
+    border: 3px solid #A9A9A9;
+    border-radius: 5px;
+    width: 300px;
+    height: 40px;
+    font-size: 30px;
+}
